@@ -6,5 +6,4 @@ JQ_PARAMS = {
     "MINUTE": "minute",
     "PROCESS_NUM_JQDATA": 3,
     "PROCESS_NUM_SAVE_HIVE": 50
-    }
 }
