@@ -11,3 +11,29 @@ def save_csv(data, file_path, header = True, sep = ",", index = None, encoding =
         header = header,
         index = index
     )
+
+def execCmd(cmd):
+    r = os.popen(cmd)
+    text = r.read()
+    r.close()
+    return text
+
+def read_file(file_path):
+    with open(file_path, "r") as f:  # 打开文件
+        rst = f.read()  # 读取文件
+    return rst
+ 
+def remove_file(file_path):
+    cmd = "rm -rf " + file_path 
+    execCmd(cmd)
+
+def mkdir(file_path):
+    cmd = "mkdir " + file_path 
+    execCmd(cmd)
+
+def change_dataframe_to_dict(data):
+    columns = data.columns 
+    rst = dict()
+    for col in columns:
+        rst[col] = data[col].values 
+    return rst 

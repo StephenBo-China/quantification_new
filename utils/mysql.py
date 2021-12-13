@@ -1,17 +1,24 @@
 # -*- coding: utf-8 -*
 
 import pymysql
+import json 
 
 class MY_SQL:
     def __init__(self):
+        account_info = self.get_account()
         self.db = pymysql.connect(
-            host = "localhost"
-            ,user = 'root'
-            ,password = "bwh759149492"
-            ,db = 'quant'
-            ,port = 3306
+            host = account_info["host"]
+            ,user = account_info["user"]
+            ,password = account_info["password"]
+            ,db = account_info["db"]
+            ,port = account_info["port"]
         )
         self.cur = self.db.cursor()
+
+    def get_account(self):
+        with open('/Users/stephenbo/JOB/PROJECT/quantification_new/params/jqdata.json', 'r') as jsonfile:
+            account_dict = json.load(jsonfile)
+            return account_dict["mysql_account"]
     
     def drop_table(self, table_name):
         self.cur.execute("DROP TABLE IF EXISTS %s" % (table_name))

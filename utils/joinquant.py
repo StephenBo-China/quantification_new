@@ -12,3 +12,6 @@ class joinquant:
         with open('/Users/stephenbo/JOB/PROJECT/quantification_new/params/jqdata.json', 'r') as jsonfile:
             account_dict = json.load(jsonfile)
             return account_dict["account"]
+    
+    def get_all_stock_info(self):
+        return get_all_securities(types=['stock'], date=None)
