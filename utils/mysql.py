@@ -2,6 +2,7 @@
 
 import pymysql
 import json 
+from tools import *
 
 class MY_SQL:
     def __init__(self):
@@ -30,7 +31,7 @@ class MY_SQL:
             elements_str = elements_str + element_name + " " + element_type + ","
         self.cur.execute(
                 """
-                CREATE TABLE %s (%s)
+                CREATE TABLE IF NOT EXISTS %s (%s)
                 """ % (table_name, elements_str[:-1])
             )
         self.cur.connection.commit()
@@ -62,6 +63,17 @@ class MY_SQL:
             """ % (table_name, clause_str)
         )
         self.cur.connection.commit()
+
+    def get_insert_elements(self, data, col_list):
+        rst = list()
+        data_dict = change_dataframe_to_dict(data)
+        for i in range(len(data)):
+            insert_element = list()
+            for att in col_list:
+                insert_element.append(data_dict[att][i])
+            insert_element = tuple(insert_element)
+            rst.append(insert_element)
+        return rst
     
     def close_db(self):
         self.cur.close()
