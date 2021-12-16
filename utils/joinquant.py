@@ -8,6 +8,7 @@ class joinquant:
     def __init__(self):
         account_info = self.get_account()
         auth(account_info["phone"], account_info["pass"])
+        print("login account=%s success." % (account_info["phone"]))
 
     def get_account(self):
         with open('/Users/stephenbo/JOB/PROJECT/quantification_new/params/jqdata.json', 'r') as jsonfile:

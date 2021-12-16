@@ -46,4 +46,8 @@ def get_current_time():
 def get_n_day_before(n = 1):
     return (datetime.date.today() - datetime.timedelta(days=n)).strftime("%Y-%m-%d %H:%M:%S")
 
+def string_date_convert(str, input_format = "%Y-%m-%d", output_format = '%Y-%m-%d %H:%M:%S'):
+    return datetime.datetime.strftime(datetime.datetime.strptime(str,input_format), output_format)
+
+
 
