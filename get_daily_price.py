@@ -10,7 +10,7 @@ from joinquant import *
 import pandas as pd
 
 mysql = mq.MY_SQL()
-account_num = 6
+account_cnt = 6
 jqdata = joinquant("account1")
 
 def create_stock_daily_price_table():
@@ -103,7 +103,7 @@ def main():
     get_stock_daily_price(stock_info_dict)
 
 if __name__ == '__main__':
-    for i in range(2, 7):
+    for i in range(2, account_cnt + 1):
         try:
             main()
         except:
