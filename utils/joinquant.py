@@ -5,15 +5,15 @@ from jqdatasdk import *
 from tools import *
 
 class joinquant:
-    def __init__(self):
-        account_info = self.get_account()
+    def __init__(self, account):
+        account_info = self.get_account(account)
         auth(account_info["phone"], account_info["pass"])
         print("login account=%s success." % (account_info["phone"]))
 
-    def get_account(self):
+    def get_account(self, account):
         with open('/Users/stephenbo/JOB/PROJECT/quantification_new/params/jqdata.json', 'r') as jsonfile:
             account_dict = json.load(jsonfile)
-            return account_dict["account"]
+            return account_dict[account]
     
     def get_all_stock_info(self):
         return get_all_securities(types=['stock'], date=None)
