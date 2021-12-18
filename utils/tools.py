@@ -43,10 +43,24 @@ def change_dataframe_to_dict(data):
 def get_current_time():
     return time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 
-def get_n_day_before(n = 1):
-    return (datetime.date.today() - datetime.timedelta(days=n)).strftime("%Y-%m-%d %H:%M:%S")
+def get_n_day_before(n = 1, current_date = None):
+    if current_date == None:
+        return (datetime.date.today() - datetime.timedelta(days=n)).strftime("%Y-%m-%d %H:%M:%S")
+    else:
+        return (current_date - datetime.timedelta(days=n)).strftime("%Y-%m-%d %H:%M:%S")
+
+def get_n_day_after(n = 1, current_date = None):
+    if current_date == None:
+        return (datetime.date.today() - datetime.timedelta(days=n)).strftime("%Y-%m-%d %H:%M:%S")
+    else:
+        return (current_date + datetime.timedelta(days=n)).strftime("%Y-%m-%d %H:%M:%S")
+
+def string2datetime(str, str_format = "%Y-%m-%d"):
+    # string format to datetime format
+    return datetime.datetime.strptime(str, str_format)
 
 def string_date_convert(str, input_format = "%Y-%m-%d", output_format = '%Y-%m-%d %H:%M:%S'):
+    # Change string date format to other string date format
     return datetime.datetime.strftime(datetime.datetime.strptime(str,input_format), output_format)
 
 
