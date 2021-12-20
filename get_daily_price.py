@@ -2,6 +2,8 @@
 
 PROJECT_PATH = ""
 import sys, os
+
+from utils.tools import get_n_day_before
 sys.path.append(PROJECT_PATH + "./utils")
 import mysql as mq 
 from tools import *
@@ -10,7 +12,7 @@ from joinquant import *
 import pandas as pd
 
 mysql = mq.MY_SQL()
-account_cnt = 6
+account_cnt = 5
 jqdata = joinquant("account1")
 
 def create_stock_daily_price_table():
@@ -54,17 +56,18 @@ def get_stock_daily_price(stock_info_dict):
     stock_code_list = stock_info_dict["stock_code_list"]
     stock_start_date_dict = stock_info_dict["stock_start_date_dict"]
     stock_end_date_dict = stock_info_dict["stock_end_date_dict"]
-    current_time = get_current_time()
-    current_time = string_date_convert(
-        current_time
-        ,input_format = "%Y-%m-%d %H:%M:%S"
-        ,output_format = "%Y-%m-%d"
-    )
-    current_time = string_date_convert(
-        current_time
-        ,input_format = "%Y-%m-%d"
-        ,output_format = "%Y-%m-%d %H:%M:%S"
-    )
+    current_time = get_n_day_before(n = 1, date_format = "%Y-%m-%d") + " 23:59:59"
+    # current_time = get_current_time()
+    # current_time = string_date_convert(
+    #     current_time
+    #     ,input_format = "%Y-%m-%d %H:%M:%S"
+    #     ,output_format = "%Y-%m-%d"
+    # )
+    # current_time = string_date_convert(
+    #     current_time
+    #     ,input_format = "%Y-%m-%d"
+    #     ,output_format = "%Y-%m-%d %H:%M:%S"
+    # )
     for stock_code in stock_code_list:
         start_date = stock_start_date_dict[stock_code]
         if start_date > "2021-01-01":

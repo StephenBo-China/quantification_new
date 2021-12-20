@@ -43,17 +43,17 @@ def change_dataframe_to_dict(data):
 def get_current_time():
     return time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 
-def get_n_day_before(n = 1, current_date = None):
+def get_n_day_before(n = 1, current_date = None, date_format = "%Y-%m-%d %H:%M:%S"):
     if current_date == None:
-        return (datetime.date.today() - datetime.timedelta(days=n)).strftime("%Y-%m-%d %H:%M:%S")
+        return (datetime.date.today() - datetime.timedelta(days=n)).strftime(date_format)
     else:
-        return (current_date - datetime.timedelta(days=n)).strftime("%Y-%m-%d %H:%M:%S")
+        return (current_date - datetime.timedelta(days=n)).strftime(date_format)
 
-def get_n_day_after(n = 1, current_date = None):
+def get_n_day_after(n = 1, current_date = None, date_format = "%Y-%m-%d %H:%M:%S"):
     if current_date == None:
-        return (datetime.date.today() - datetime.timedelta(days=n)).strftime("%Y-%m-%d %H:%M:%S")
+        return (datetime.date.today() + datetime.timedelta(days=n)).strftime(date_format)
     else:
-        return (current_date + datetime.timedelta(days=n)).strftime("%Y-%m-%d %H:%M:%S")
+        return (current_date + datetime.timedelta(days=n)).strftime(date_format)
 
 def string2datetime(str, str_format = "%Y-%m-%d"):
     # string format to datetime format

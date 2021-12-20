@@ -21,7 +21,7 @@ FROM
     (
         SELECT  stock_code 
                 ,MAX(ds) AS ds 
-        FROM    stock_daily_price_tmp 
+        FROM    stock_daily_price_tmp
         GROUP BY stock_code 
     ) t2 ON t1.stock_code = t2.stock_code 
 ) t

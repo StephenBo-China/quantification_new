@@ -47,6 +47,7 @@ LEFT OUTER JOIN
     SELECT  ds, stock_code 
     FROM    stock_ma_value
     WHERE   ds >= "2021-09-01"
+    GROUP BY ds, stock_code 
 ) t2 ON t1.stock_code = t2.stock_code AND t1.ds = t2.ds 
 WHERE t2.ds IS NULL AND t2.stock_code IS NULL
 ;

@@ -43,6 +43,7 @@ LEFT OUTER JOIN
             ,ds
     FROM    stock_daily_price_final
     WHERE   ds >= "2021-12-01"
+    GROUP BY stock_code, ds 
 ) t2 ON t1.stock_code = t2.stock_code AND t1.ds = t2.ds  
 WHERE t2.stock_code IS NULL AND t2.ds IS NULL
 ;
