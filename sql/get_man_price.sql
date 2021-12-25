@@ -36,7 +36,7 @@ FROM
                 ,MAX(volume) AS volume 
                 ,MAX(money) AS money 
         FROM    stock_daily_price_final 
-        WHERE   ds >= "2021-09-01"
+        WHERE   ds >= "2021-06-01"
         GROUP BY stock_code, ds
     ) t
     GROUP BY t.stock_code, t.ds
@@ -46,7 +46,7 @@ LEFT OUTER JOIN
 (
     SELECT  ds, stock_code 
     FROM    stock_ma_value
-    WHERE   ds >= "2021-09-01"
+    WHERE   ds >= "2021-06-01"
     GROUP BY ds, stock_code 
 ) t2 ON t1.stock_code = t2.stock_code AND t1.ds = t2.ds 
 WHERE t2.ds IS NULL AND t2.stock_code IS NULL

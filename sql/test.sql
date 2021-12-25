@@ -1,8 +1,6 @@
 
 
-SELECT  ds, stock_code, close
-FROM    stock_daily_price_final 
-WHERE   stock_code = "002368.XSHE"
-AND     ds >= "2021-01-01"
-AND     ds <= "2021-02-09"
+SELECT  MAX(ds)
+FROM    stock_volume_avg
+WHERE   ds >= "2021-12-01"
 ;

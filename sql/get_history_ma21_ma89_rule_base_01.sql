@@ -1,11 +1,11 @@
 
+DROP TABLE IF EXISTS stock_ma21_ma89_rule_base_table_01;
 DROP TABLE IF EXISTS stock_ma21_ma89_rule_base_table;
 
-CREATE TABLE IF NOT EXISTS stock_ma21_ma89_rule_base_table
+CREATE TABLE IF NOT EXISTS stock_ma21_ma89_rule_base_table_01
 (
     ma_21             FLOAT   
-    ,ma_89            FLOAT  
-    ,volume_avg_89    FLOAT   
+    ,ma_89            FLOAT    
     ,open             FLOAT    
     ,close            FLOAT   
     ,volume           FLOAT    
@@ -14,10 +14,9 @@ CREATE TABLE IF NOT EXISTS stock_ma21_ma89_rule_base_table
 )
 ;
 
-INSERT INTO stock_ma21_ma89_rule_base_table(ma_21, ma_89, volume_avg_89, open, close, volume, stock_code, ds)
+INSERT INTO stock_ma21_ma89_rule_base_table_01(ma_21, ma_89, open, close, volume, stock_code, ds)
 SELECT  t2.ma_21 AS ma_21 
         ,t2.ma_89 AS ma_89 
-        ,t3.avg_89 AS volume_avg_89
         ,t1.open AS open 
         ,t1.close AS close 
         ,t1.volume AS volume 
@@ -42,12 +41,4 @@ LEFT OUTER JOIN
     FROM    stock_ma_value 
     GROUP BY stock_code, ds 
 ) t2 ON t1.stock_code = t2.stock_code AND t1.ds = t2.ds
-LEFT OUTER JOIN 
-(
-    SELECT  MAX(avg_89) AS avg_89
-            ,stock_code 
-            ,ds 
-    FROM    stock_volume_avg 
-    GROUP BY stock_code, ds    
-) t3 ON t1.stock_code = t3.stock_code AND t1.ds = t3.ds 
 ;

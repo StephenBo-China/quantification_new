@@ -10,10 +10,10 @@ CREATE TABLE IF NOT EXISTS stock_volume_avg
 ;
 
 INSERT INTO stock_volume_avg(avg_7, avg_21, avg_60, avg_89, stock_code, ds)
-SELECT  t1.ma_7 AS ma_7 
-        ,t1.ma_21 AS ma_21 
-        ,t1.ma_60 AS ma_60 
-        ,t1.ma_89 AS ma_89
+SELECT  t1.avg_7 AS avg_7 
+        ,t1.avg_21 AS avg_21 
+        ,t1.avg_60 AS avg_60 
+        ,t1.avg_89 AS avg_89
         ,t1.stock_code AS stock_code 
         ,t1.ds AS ds 
 FROM 
@@ -36,7 +36,7 @@ FROM
                 ,MAX(volume) AS volume 
                 ,MAX(money) AS money 
         FROM    stock_daily_price_final 
-        WHERE   ds >= "2021-09-01"
+        WHERE   ds >= "2021-06-01"
         GROUP BY stock_code, ds
     ) t
     GROUP BY t.stock_code, t.ds
@@ -46,7 +46,7 @@ LEFT OUTER JOIN
 (
     SELECT  ds, stock_code 
     FROM    stock_volume_avg
-    WHERE   ds >= "2021-09-01"
+    WHERE   ds >= "2021-06-01"
     GROUP BY ds, stock_code
 ) t2 ON t1.stock_code = t2.stock_code AND t1.ds = t2.ds 
 WHERE t2.ds IS NULL AND t2.stock_code IS NULL
